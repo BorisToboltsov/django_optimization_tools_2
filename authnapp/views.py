@@ -3,6 +3,7 @@ from django.contrib import auth
 from django.core.mail import send_mail
 from django.shortcuts import HttpResponseRedirect, render
 from django.urls import reverse
+from django.contrib import messages
 
 from authnapp.forms import ShopUserEditForm, ShopUserLoginForm, ShopUserRegisterForm
 from authnapp.models import ShopUser
@@ -44,6 +45,7 @@ def register(request):
             user = register_form.save()
             if send_verify_mail(user):
                 print("сообщение для подтверждения регистрации отправлено")
+                messages.success(request, "The message was sent successfully")
                 return HttpResponseRedirect(reverse("auth:login"))
             print("ошибка отправки сообщения для подтверждения регистрации")
             return HttpResponseRedirect(reverse("auth:login"))

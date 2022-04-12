@@ -2,7 +2,14 @@
 {% load static %}
 
 {% block content %}
-
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li class="{{ message.tags }}">
+        <p style="background: green; text-align: center;">{{ message }}</p></li>
+    {% endfor %}
+</ul>
+{% endif %}
 <form class="form-horizontal" action="{% url 'auth:login' %}" method="post">
     {% csrf_token %}
     {% if next_page %}
