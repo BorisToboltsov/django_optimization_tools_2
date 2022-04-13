@@ -1,10 +1,9 @@
 from django.conf import settings
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.core.mail import send_mail
 from django.db import transaction
 from django.shortcuts import HttpResponseRedirect, render
 from django.urls import reverse
-from django.contrib import messages
 
 from authnapp.forms import ShopUserEditForm, ShopUserLoginForm, ShopUserProfileEditForm, ShopUserRegisterForm
 from authnapp.models import ShopUser
