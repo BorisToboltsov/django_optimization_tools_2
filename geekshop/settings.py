@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "authnapp",
     "basketapp",
     "adminapp",
+    "social_django",
 ]
 
 MIDDLEWARE = [
@@ -69,6 +70,8 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "mainapp.context_processors.basket",
+                "social_django.context_processors.backends",
+                "social_django.context_processors.login_redirect",
             ],
         },
     },
@@ -174,3 +177,26 @@ EMAIL_HOST_PASSWORD = None
 # Email as files
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = "tmp/email-messages/"
+
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "social_core.backends.github.GithubOAuth2",
+    "social_core.backends.google.GoogleOAuth2",
+    "social_core.backends.vk.VKOAuth2",
+)
+
+import json
+
+with open(
+    os.path.join(BASE_DIR, "tmp", "secrets", "secrets.json"), "r"
+) as secrets:
+    secrets_auth = json.load(secrets)
+
+SOCIAL_AUTH_GITHUB_KEY = secrets_auth["github_client_id"]
+SOCIAL_AUTH_GITHUB_SECRET = secrets_auth["github_client_secret"]
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = secrets_auth["google_client_id"]
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = secrets_auth["google_client_secret"]
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = secrets_auth["vk_client_id"]
+SOCIAL_AUTH_VK_OAUTH2_SECRET = secrets_auth["vk_client_secret"]
