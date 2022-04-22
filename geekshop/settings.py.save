@@ -154,8 +154,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 #   https://docs.djangoproject.com/en/3.2/ref/settings/#login-url
 LOGIN_URL = "authnapp:login"
 
-DOMAIN_NAME = "http://test.vcore.su"
-
+DOMAIN_NAME = "http://"
+.
 # Read about sending email:
 #   https://docs.djangoproject.com/en/2.2/topics/email/
 
@@ -181,8 +181,6 @@ EMAIL_FILE_PATH = "tmp/email-messages/"
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     "social_core.backends.github.GithubOAuth2",
-    "social_core.backends.vk.VKOAuth2",
-    "social_core.backends.google.GoogleOAuth2",
 )
 
 import json
